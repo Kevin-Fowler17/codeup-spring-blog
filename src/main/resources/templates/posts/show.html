@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head th:replace="partials/partials :: head" >
+    <title>Title</title>
+</head>
+<body>
+
+<nav th:replace="partials/partials :: navbar" />
+
+
+<div class="container">
+    <div class="card m-5" style="width: 22rem;">
+        <div class="card-body">
+            <h2 th:text="${title}">title is missing</h2>
+            <p><u>Description</u></p>
+            <h2 th:text="${body}">body is missing</h2>
+        </div>
+    </div>
+</div>
+
+
+<footer th:replace="partials/partials.html :: footer" />
+
+</body>
+</html>

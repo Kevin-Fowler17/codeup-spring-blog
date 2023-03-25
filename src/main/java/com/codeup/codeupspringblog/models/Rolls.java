@@ -1,4 +1,4 @@
-package com.codeup.codeupspringblog.controllers;
+package com.codeup.codeupspringblog.models;
 
 public class Rolls {
     private int random;
