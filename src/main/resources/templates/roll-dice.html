@@ -1,36 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:insert="partials :: head /">
+<head>
 
     <title>Dice Roll</title>
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="#">Hidden brand</a>
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
-                </li>
-            </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-        </div>
-    </div>
-</nav>
+
 
 <h1>Roll the dice!!!</h1>
 
@@ -52,13 +28,13 @@
 
     <hr>
 
-    <th:block th:each="i: ${#numbers.sequence(1, 5)}">
-    </th:block>
+    <div th:each="roll : ${rolls}">
+        <p>The correct answer is: <span th:text="${roll.random}">(insert dog name here)</span></p>
+        <p>You guessed: <span th:text="${roll.guess}">(insert dog name here)</span></p>
+        <p>Your guess was: <span th:text="${roll.result}">(insert dog name here)</span></p>
+    </div>
 
     <h2 th:text="${timesCorrect}">overall correct count missing</h2>
-
-
-<footer th:replace="partials :: footer" />
 
 </body>
 </html>
