@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
 
+<head th:replace="partials/partials :: head" >
     <title>Dice Roll</title>
-
 </head>
 <body>
 
+<nav th:replace="partials/partials :: navbar" />
 
 <h1>Roll the dice!!!</h1>
 
@@ -35,6 +35,8 @@
     </div>
 
     <h2 th:text="${timesCorrect}">overall correct count missing</h2>
+
+<footer th:replace="partials/partials.html :: footer" />
 
 </body>
 </html>
