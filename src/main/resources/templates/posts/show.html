@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <head th:replace="partials/partials :: head" >
     <title>Title</title>
@@ -8,17 +8,14 @@
 
 <nav th:replace="partials/partials :: navbar" />
 
-
 <div class="container">
     <div class="card m-5" style="width: 22rem;">
         <div class="card-body">
-            <h2 th:text="${title}">title is missing</h2>
-            <p><u>Description</u></p>
-            <h2 th:text="${body}">body is missing</h2>
+            <h3 th:text="${post.title}">title is missing</h3>
+            <p th:text="${post.body}">body is missing</p>
         </div>
     </div>
 </div>
-
 
 <footer th:replace="partials/partials.html :: footer" />
 
