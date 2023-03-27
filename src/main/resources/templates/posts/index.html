@@ -20,6 +20,7 @@
                     <div class="card-body">
                         <h3 th:text="${post.title}">title is missing</h3>
                         <p th:text="${post.body}">body is missing</p>
+                        <a th:href="@{/posts/} + ${post.id}">Link</a>
                     </div>
                 </div>
             </div>
