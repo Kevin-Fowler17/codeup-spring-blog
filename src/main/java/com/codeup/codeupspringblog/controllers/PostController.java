@@ -25,6 +25,21 @@ public class PostController {
         return "posts/index";
     }
 
+    @PostMapping(path = "")
+    public String editDelete(@RequestParam(name = "button") String buttonClicked) {
+
+        String postID = buttonClicked.replace("edit", "").replace("delete", "");
+
+        if (buttonClicked.contains("edit")) {
+            return "redirect:/posts/edit/" + postID;
+        } else {
+            postDao.deleteById(Long.valueOf(postID));
+        }
+
+        return "redirect:/posts";
+
+    }
+
     @GetMapping("/{id}")
     public String postID(@PathVariable long id, Model model){
 
@@ -46,6 +61,30 @@ public class PostController {
         Post post = new Post();
         post.setTitle(title);
         post.setBody(body);
+
+        postDao.save(post);
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editPost(@PathVariable long id, Model model) {
+
+        Post post = postDao.findById(id).get();
+        model.addAttribute("post", post);
+
+        return "/posts/edit";
+    }
+
+    @PostMapping(path = "/edit")
+    public String submitEditPost(@RequestParam(name = "title") String title,
+                             @RequestParam(name = "body") String body) {
+
+        Post post = new Post();
+        post.setId();
+        post.setTitle(title);
+        post.setBody(body);
+
+        System.out.println(post);
 
         postDao.save(post);
         return "redirect:/posts";
