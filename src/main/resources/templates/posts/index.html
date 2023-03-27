@@ -15,15 +15,17 @@
     <div class="container d-flex justify-content-center flex-wrap">
 
         <div th:each="post : ${posts}">
-            <div class="container">
-                <div class="card m-5" style="width: 22rem;">
-                    <div class="card-body">
-                        <h3 th:text="${post.title}">title is missing</h3>
-                        <p th:text="${post.body}">body is missing</p>
-                        <a th:href="@{/posts/} + ${post.id}">Link</a>
+            <a th:href="@{/posts/} + ${post.id}" class="NoDeco">
+                <div class="container">
+                    <div class="card m-5" style="width: 22rem;">
+                        <div class="card-body">
+                            <h3 th:text="${post.title}">title is missing</h3>
+                            <p th:text="${post.body}">body is missing</p>
+                            <a th:href="@{/posts/} + ${post.id}">Link</a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </div>
