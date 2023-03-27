@@ -40,13 +40,15 @@ public class PostController {
     }
 
     @PostMapping(path = "/create")
-    public String createdPost() {
+    public String submitPost(@RequestParam(name = "title") String title,
+                             @RequestParam(name = "body") String body) {
+
         Post post = new Post();
-        post.setTitle("post title");
-        post.setBody("post body");
+        post.setTitle(title);
+        post.setBody(body);
 
         postDao.save(post);
-        return "/posts/index";
+        return "redirect:/posts";
     }
 
 }

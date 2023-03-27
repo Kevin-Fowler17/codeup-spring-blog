@@ -8,15 +8,15 @@
 
 <nav th:replace="partials/partials :: navbar"/>
 
-<form>
+<form action="/posts/create" method="post">
 
   <div class="mb-3">
-    <label for="blogTitle" class="form-label">Title</label>
-    <input type="text" class="form-control" id="blogTitle" name="blogTitle">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" class="form-control" id="title" name="title">
   </div>
   <div class="mb-3">
-    <label for="content" class="form-label">Body</label>
-    <textarea class="form-control" id="content" name="content" rows="10" cols="50"></textarea>
+    <label for="body" class="form-label">Body</label>
+    <textarea class="form-control" id="body" name="body" rows="10" cols="50"></textarea>
   </div>
 
   <input type="submit" value="Submit">
