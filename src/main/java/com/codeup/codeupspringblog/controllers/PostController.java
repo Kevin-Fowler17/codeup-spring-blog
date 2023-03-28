@@ -1,7 +1,9 @@
 package com.codeup.codeupspringblog.controllers;
 
 import com.codeup.codeupspringblog.models.Post;
+import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repositories.PostRepository;
+import com.codeup.codeupspringblog.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import java.util.List;
 public class PostController {
 
     private final PostRepository postDao;
+    private final UserRepository userDao;
 
     @GetMapping()
     public String posts(Model model) {
@@ -46,6 +49,9 @@ public class PostController {
         Post post = postDao.findById(id).get();
         model.addAttribute("post", post);
 
+        User user = userDao.findById(1L).get();
+        model.addAttribute("user", user);
+
         return "posts/show";
     }
 
@@ -61,6 +67,9 @@ public class PostController {
         Post post = new Post();
         post.setTitle(title);
         post.setBody(body);
+
+        User user = userDao.findById(1L).get();
+        post.setUser(user);
 
         postDao.save(post);
         return "redirect:/posts";
@@ -85,8 +94,6 @@ public class PostController {
         post.setId(id);
         post.setTitle(title);
         post.setBody(body);
-
-        System.out.println(post);
 
         postDao.save(post);
         return "redirect:/posts";
