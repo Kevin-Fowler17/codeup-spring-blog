@@ -28,5 +28,6 @@ public class User {
     private String password;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @ToString.Exclude
     private List<Post> posts;
 }

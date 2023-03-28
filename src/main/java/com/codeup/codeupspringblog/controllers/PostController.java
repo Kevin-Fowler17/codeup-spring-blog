@@ -27,6 +27,7 @@ public class PostController {
         if (search != null) {
             List<Post> posts = (List<Post>) postDao.findLikeTitleOrBody(search);
             model.addAttribute("posts", posts);
+//            System.out.println(posts);
         } else {
             List<Post> posts = postDao.findAll();
             model.addAttribute("posts", posts);
