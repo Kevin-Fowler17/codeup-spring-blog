@@ -13,12 +13,13 @@
 <div class="container-fluid">
     <h1 class="ms-5">Here Are all the blogs!</h1>
 
-    <div class="container d-flex justify-content-center flex-wrap">
+    <div class="container d-flex justify-content-center flex-wrap border-0">
 
         <div th:each="post : ${posts}">
             <a th:href="@{/posts/} + ${post.id}" class="NoDeco">
                 <div class="container">
-                    <div class="card m-5" style="width: 22rem;">
+                    <div class="card m-2 mb-4 col-1 col-md-6 col-sm-2" style="width: 20rem;">
+<!--                        <div class="card m-4" style="width: 22rem;">-->
                         <div class="card-body">
                             <h3 th:text="${post.title}">title is missing</h3>
                             <p th:text="${post.body}">body is missing</p>

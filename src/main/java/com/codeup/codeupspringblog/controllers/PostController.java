@@ -76,11 +76,13 @@ public class PostController {
     }
 
     @PostMapping(path = "/edit")
-    public String submitEditPost(@RequestParam(name = "title") String title,
-                             @RequestParam(name = "body") String body) {
+    public String submitEditPost(@RequestParam(name = "id") long id,
+                                 @RequestParam(name = "title") String title,
+                                 @RequestParam(name = "body") String body) {
 
         Post post = new Post();
-        post.setId();
+
+        post.setId(id);
         post.setTitle(title);
         post.setBody(body);
 
