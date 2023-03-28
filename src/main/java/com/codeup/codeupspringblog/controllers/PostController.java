@@ -4,6 +4,7 @@ import com.codeup.codeupspringblog.models.Post;
 import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repositories.PostRepository;
 import com.codeup.codeupspringblog.repositories.UserRepository;
+import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,14 +17,20 @@ import java.util.List;
 @RequestMapping(path = "/posts")
 public class PostController {
 
+    // dependency injection
     private final PostRepository postDao;
     private final UserRepository userDao;
 
-    @GetMapping()
-    public String posts(Model model) {
+    @GetMapping
+    public String posts(@RequestParam @Nullable String search, Model model) {
 
-        List<Post> posts = postDao.findAll();
-        model.addAttribute("posts", posts);
+        if (search != null) {
+            List<Post> posts = (List<Post>) postDao.findLikeTitle(search);
+            model.addAttribute("posts", posts);
+        } else {
+            List<Post> posts = postDao.findAll();
+            model.addAttribute("posts", posts);
+        }
 
         return "posts/index";
     }
