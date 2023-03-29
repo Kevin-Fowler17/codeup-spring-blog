@@ -5,6 +5,8 @@ import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repositories.PostRepository;
 import com.codeup.codeupspringblog.repositories.UserRepository;
 import jakarta.annotation.Nullable;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,12 +24,16 @@ public class PostController {
     private final UserRepository userDao;
 
     @GetMapping
-    public String posts(@RequestParam @Nullable String search, Model model) {
+    public String posts(@RequestParam @Nullable String search,
+                        Model model,
+                        HttpServletRequest request,
+                        HttpServletResponse response) {
+
+        request.getSession().getAttribute("user");
 
         if (search != null) {
             List<Post> posts = (List<Post>) postDao.findLikeTitleOrBody(search);
             model.addAttribute("posts", posts);
-//            System.out.println(posts);
         } else {
             List<Post> posts = postDao.findAll();
             model.addAttribute("posts", posts);
@@ -70,14 +76,16 @@ public class PostController {
 
     @PostMapping(path = "/create")
     public String submitPost(@RequestParam(name = "title") String title,
-                             @RequestParam(name = "body") String body) {
+                             @RequestParam(name = "body") String body,
+                             HttpServletRequest request,
+                             HttpServletResponse response) {
 
         Post post = new Post();
         post.setTitle(title);
         post.setBody(body);
 
-        User user = userDao.findById(1L).get();
-        post.setUser(user);
+        User currentUser = (User) request.getSession().getAttribute("user");
+        post.setUser(currentUser);
 
         postDao.save(post);
         return "redirect:/posts";
