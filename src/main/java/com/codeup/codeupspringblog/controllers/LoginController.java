@@ -4,6 +4,7 @@ import com.codeup.codeupspringblog.models.Post;
 import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repositories.PostRepository;
 import com.codeup.codeupspringblog.repositories.UserRepository;
+import com.codeup.codeupspringblog.services.Password;
 import jakarta.annotation.Nullable;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
@@ -27,30 +28,33 @@ public class LoginController {
 
 
     @GetMapping
-    public String login() {
-        System.out.println("*********************************************************");
+    public String login(Model model) {
+        model.addAttribute("hideErrMsg", true);
         return "login";
     }
 
     @PostMapping
     public String checkLogin(@RequestParam String username,
-                             @RequestParam String password) {
-
-
-//        User user = new User();
-//        user.setUsername(username);
-//        user.setPassword(password);
+                             @RequestParam String password, Model model) {
 
         User user = userDao.findByUsername(username);
 
-        System.out.println("*********************************************************");
-        System.out.println(user);
-        System.out.println("*********************************************************");
+        if (user == null) {
+            model.addAttribute("stickyUsername", username);
+            model.addAttribute("hideErrMsg", false);
+            return "login";
+        }
 
-//        User user = userDao.findById(1L).get();
-//        post.setUser(user);
-//
-//        postDao.save(post);
+        boolean validAttempt = Password.check(password, user.getPassword());
+
+        if (validAttempt) {
+            // set session userExists
+//            session.setAttribute("user", user);
+            model.addAttribute("hideErrMsg", true);
+        } else {
+            model.addAttribute("hideErrMsg", false);
+            return "login";
+        }
 
         return "redirect:/posts";
     }
