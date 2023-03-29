@@ -62,9 +62,9 @@ public class PostController {
 
         Post post = postDao.findById(id).get();
         model.addAttribute("post", post);
-
-        User user = userDao.findById(1L).get();
-        model.addAttribute("user", user);
+//
+//        User user = userDao.findById(1L).get();
+//        model.addAttribute("user", user);
 
         return "posts/show";
     }

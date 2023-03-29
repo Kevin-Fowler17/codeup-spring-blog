@@ -13,7 +13,7 @@
         <div class="card-body">
             <h3 th:text="${post.title}">title is missing</h3>
             <p th:text="${post.body}">body is missing</p>
-            <p>Email: <span th:text="${user.email}"></span></p>
+            <p>Email: <span th:text="${post.user.email}"></span></p>
         </div>
     </div>
 </div>
