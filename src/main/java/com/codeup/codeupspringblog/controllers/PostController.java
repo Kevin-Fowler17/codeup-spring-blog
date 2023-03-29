@@ -48,7 +48,6 @@ public class PostController {
         String postID = buttonClicked.replace("edit", "").replace("delete", "");
 
         if (buttonClicked.contains("edit")) {
-//            return "redirect:/posts/edit/" + postID;
             return "redirect:/posts/" + postID + "/edit";
         } else {
             postDao.deleteById(Long.valueOf(postID));
@@ -98,20 +97,5 @@ public class PostController {
 
         return "/posts/create";
     }
-
-//    @PostMapping(path = "/edit")
-//    public String submitEditPost(@RequestParam(name = "id") long id,
-//                                 @RequestParam(name = "title") String title,
-//                                 @RequestParam(name = "body") String body) {
-//
-//        Post post = new Post();
-//
-//        post.setId(id);
-//        post.setTitle(title);
-//        post.setBody(body);
-//
-//        postDao.save(post);
-//        return "redirect:/posts";
-//    }
 
 }
