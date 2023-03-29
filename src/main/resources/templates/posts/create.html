@@ -10,16 +10,18 @@
 
 <div class="container">
 
-    <form action="/posts/create" method="post">
+    <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
 
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control" id="title" name="title">
+            <input th:field="*{title}" type="text" class="form-control" id="title" name="title">
         </div>
         <div class="mb-3">
             <label for="body" class="form-label">Body</label>
-            <textarea class="form-control" id="body" name="body" rows="10" cols="50"></textarea>
+            <textarea th:field="*{body}" class="form-control" id="body" name="body" rows="10" cols="50"></textarea>
         </div>
+
+        <input type="hidden" th:field="*{id}" />
 
         <input type="submit" id="postSubmit" value="Submit">
 

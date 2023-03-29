@@ -39,7 +39,7 @@ public class PostController {
             model.addAttribute("posts", posts);
         }
 
-        return "posts/index";
+        return "/posts/index";
     }
 
     @PostMapping(path = "")
@@ -48,7 +48,8 @@ public class PostController {
         String postID = buttonClicked.replace("edit", "").replace("delete", "");
 
         if (buttonClicked.contains("edit")) {
-            return "redirect:/posts/edit/" + postID;
+//            return "redirect:/posts/edit/" + postID;
+            return "redirect:/posts/" + postID + "/edit";
         } else {
             postDao.deleteById(Long.valueOf(postID));
         }
@@ -62,57 +63,55 @@ public class PostController {
 
         Post post = postDao.findById(id).get();
         model.addAttribute("post", post);
-//
-//        User user = userDao.findById(1L).get();
-//        model.addAttribute("user", user);
 
-        return "posts/show";
+        return "/posts/show";
     }
 
     @GetMapping("/create")
-    public String createPost() {
+    public String createPost(Model model,
+                             HttpServletRequest request,
+                             HttpServletResponse response) {
+
+        model.addAttribute("post", new Post());
         return "/posts/create";
     }
 
     @PostMapping(path = "/create")
-    public String submitPost(@RequestParam(name = "title") String title,
-                             @RequestParam(name = "body") String body,
+    public String submitPost(@ModelAttribute Post post,
                              HttpServletRequest request,
                              HttpServletResponse response) {
 
-        Post post = new Post();
-        post.setTitle(title);
-        post.setBody(body);
-
         User currentUser = (User) request.getSession().getAttribute("user");
+
         post.setUser(currentUser);
 
         postDao.save(post);
+
         return "redirect:/posts";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/{id}/edit")
     public String editPost(@PathVariable long id, Model model) {
 
         Post post = postDao.findById(id).get();
         model.addAttribute("post", post);
 
-        return "/posts/edit";
+        return "/posts/create";
     }
 
-    @PostMapping(path = "/edit")
-    public String submitEditPost(@RequestParam(name = "id") long id,
-                                 @RequestParam(name = "title") String title,
-                                 @RequestParam(name = "body") String body) {
-
-        Post post = new Post();
-
-        post.setId(id);
-        post.setTitle(title);
-        post.setBody(body);
-
-        postDao.save(post);
-        return "redirect:/posts";
-    }
+//    @PostMapping(path = "/edit")
+//    public String submitEditPost(@RequestParam(name = "id") long id,
+//                                 @RequestParam(name = "title") String title,
+//                                 @RequestParam(name = "body") String body) {
+//
+//        Post post = new Post();
+//
+//        post.setId(id);
+//        post.setTitle(title);
+//        post.setBody(body);
+//
+//        postDao.save(post);
+//        return "redirect:/posts";
+//    }
 
 }
