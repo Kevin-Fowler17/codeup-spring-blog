@@ -18,30 +18,23 @@
         <li class="nav-item">
           <a class="nav-link" href="/posts">Blogs</a>
         </li>
-
-<!--        <div th:if="${true}">-->
-          <li th:if="${true}" class="nav-item">
-            <a class="nav-link active" href="/login">Login</a>
-          </li>
-          <li th:if="${true}" class="nav-item">
-            <a class="nav-link active" href="/register">Register</a>
-          </li>
-<!--        </div>-->
-
-          <li th:unless="${!true}" class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul th:unless="${!true}" class="dropdown-menu">
-              <li><a class="dropdown-item" href="/posts/create">Add blog</a></li>
-              <li><a class="dropdown-item" href="#">Edit blog</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="/Logout">Logout</a></li>
-            </ul>
-          </li>
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link disabled">Disabled</a>-->
-<!--        </li>-->
+        <li th:if="${session.user == null}" class="nav-item">
+          <a class="nav-link active" href="/login">Login</a>
+        </li>
+        <li th:if="${session.user == null}" class="nav-item">
+          <a class="nav-link active" href="/register">Register</a>
+        </li>
+        <li th:unless="${session.user == null}" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/posts/create">Add blog</a></li>
+            <li><a class="dropdown-item" href="#">Edit blog</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+          </ul>
+        </li>
       </ul>
       <form class="d-flex" role="search" method="get" action="/posts">
         <input name="search" class="form-control me-2" type="search" placeholder="Search">
