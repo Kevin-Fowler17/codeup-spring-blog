@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <header th:insert="partials/partials :: header" />
-  <title>Create blog post</title>
+    <header th:insert="partials/partials :: header"/>
+    <title>Create blog post</title>
 </head>
 <body>
 
 <nav th:replace="partials/partials :: navbar"/>
 
-<form action="/posts/create" method="post">
+<div class="container">
 
-  <div class="mb-3">
-    <label for="title" class="form-label">Title</label>
-    <input type="text" class="form-control" id="title" name="title">
-  </div>
-  <div class="mb-3">
-    <label for="body" class="form-label">Body</label>
-    <textarea class="form-control" id="body" name="body" rows="10" cols="50"></textarea>
-  </div>
+    <form action="/posts/create" method="post">
 
-  <input type="submit" value="Submit">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title">
+        </div>
+        <div class="mb-3">
+            <label for="body" class="form-label">Body</label>
+            <textarea class="form-control" id="body" name="body" rows="10" cols="50"></textarea>
+        </div>
 
-</form>
+        <input type="submit" value="Submit">
+
+    </form>
+
+</div>
 
 <footer th:replace="partials/partials.html :: footer"/>
 

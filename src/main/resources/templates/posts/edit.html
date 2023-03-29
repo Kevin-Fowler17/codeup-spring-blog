@@ -1,31 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <header th:insert="partials/partials :: header" />
-  <title th:text="${post.title}"></title>
+    <header th:insert="partials/partials :: header"/>
+    <title th:text="${post.title}"></title>
 </head>
 <body>
 
 <nav th:replace="partials/partials :: navbar"/>
 
-<form th:object="${post}" action="/posts/edit" method="post">
+<div class="container">
 
-  <div class="mb-3">
-    <label for="title" class="form-label">Title</label>
-    <input type="text" class="form-control" th:value="${post.title}" id="title" name="title">
-  </div>
-  <div class="mb-3">
-    <label for="body" class="form-label">Body</label>
-<!--    <input type="text" class="form-control" th:value="${post.body}" id="body" name="body" rows="10" cols="50">-->
-<!--    <form th:object="${post}" th:action="@{/posts/edit}" method="post">-->
-      <textarea th:field="*{body}" class="form-control" id="body" name="body" rows="10" cols="50"></textarea>
-  </div>
+    <form th:object="${post}" action="/posts/edit" method="post">
 
-  <input type="hidden" th:value="${post.id}" name="id" />
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" th:value="${post.title}" id="title" name="title">
+        </div>
+        <div class="mb-3">
+            <label for="body" class="form-label">Body</label>
+            <!--    <input type="text" class="form-control" th:value="${post.body}" id="body" name="body" rows="10" cols="50">-->
+            <!--    <form th:object="${post}" th:action="@{/posts/edit}" method="post">-->
+            <textarea th:field="*{body}" class="form-control" id="body" name="body" rows="10" cols="50"></textarea>
+        </div>
 
-  <input type="submit" value="Submit">
+        <input type="hidden" th:value="${post.id}" name="id"/>
 
-</form>
+        <input type="submit" value="Submit">
+
+    </form>
+
+</div>
 
 <footer th:replace="partials/partials.html :: footer"/>
 

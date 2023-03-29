@@ -9,17 +9,3 @@ document.addEventListener('keydown', function(e) {
         document.getElementById('audio').play();
     }
 });
-
-// let konamiCode = "ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightbaEnter"
-// let konamiCode = "g";
-// let konamiCheck = "";
-// $(document).keyup(function(event){
-//     konamiCheck = konamiCheck + event.key;
-//
-//     if (konamiCheck === konamiCode) {
-//
-//         document.getElementById('audio').play();
-//         // music.play();
-//
-//     }
-// });
