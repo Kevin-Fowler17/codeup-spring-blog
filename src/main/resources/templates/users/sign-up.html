@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <header th:insert="partials/partials :: header"/>
+    <title>Sign up</title>
+</head>
+<body>
+
+<nav th:replace="partials/partials :: navbar"/>
+
+<div class="container">
+    <h1>Create an account</h1>
+    <h3>Please fill in your information.</h3>
+    <form th:action="@{/sign-up}" method="post" th:object="${user}">
+
+        <div class="col-md-4">
+            <label for="username" class="form-label">Username</label>
+            <input id="username" class="form-control" th:field="*{username}"/>
+        </div>
+
+        <div class="col-md-4">
+            <label for="email" class="form-label">Email</label>
+            <input id="email" class="form-control" th:field="*{email}"/>
+        </div>
+
+        <div class="col-md-4">
+            <label for="password" class="form-label">Password</label>
+            <input id="password" class="form-control" type="password" th:field="*{password}"/>
+        </div>
+
+        <br>
+
+        <input value="Submit" type="submit"/>
+
+        <!--        <div class="col-md-4">-->
+        <!--            <label for="validationServerUsername" class="form-label">Username</label>-->
+        <!--            <div class="input-group has-validation">-->
+        <!--                <input name="username" type="text" class="form-control" th:classappend="${userExists} ? '' : 'is-invalid'" th:value="${stickyUsername}" id="validationServerUsername" required>-->
+        <!--                <div id="validationServerUsernameFeedback" class="invalid-feedback">-->
+        <!--                    Username already exists.-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+
+        <!--        <br>-->
+
+        <!--        <div class="col-md-4">-->
+        <!--            <label for="validationServerEmail" class="form-label">Email</label>-->
+        <!--            <div class="input-group has-validation">-->
+        <!--                <input name="email" type="text" class="form-control" th:classappend="${emailIsInvalid} ? '' : 'is-invalid'" th:value="${stickyEmail}" id="validationServerEmail" required>-->
+        <!--                <div id="validationServerEmailFeedback" class="invalid-feedback">-->
+        <!--                    Email address is invalid.-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+
+        <!--        <br>-->
+
+        <!--        <div class="col-md-4">-->
+        <!--            <label for="validationServerPassword" class="form-label">Password</label>-->
+        <!--            <div class="input-group has-validation">-->
+        <!--                <input name="password" type="password" class="form-control" th:classappend="${passwordMismatch} ? '' : 'is-invalid'" id="validationServerPassword" required>-->
+        <!--                <div id="validationServerPasswordFeedback" class="invalid-feedback">-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+
+        <!--        <br>-->
+
+        <!--        <div class="col-md-4">-->
+        <!--            <label for="validationServerConfirmPassword" class="form-label">Confirm Password</label>-->
+        <!--            <div class="input-group has-validation">-->
+        <!--                <input name="confirm_password" type="password" class="form-control" th:classappend="${passwordMismatch} ? '' : 'is-invalid'" id="validationServerConfirmPassword" required>-->
+        <!--                <div id="validationServerConfirmPasswordFeedback" class="invalid-feedback">-->
+        <!--                    Passwords do not match, re-enter.-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+
+        <!--        <br>-->
+
+        <!--        <input type="submit" class="btn btn-primary btn-block">-->
+
+    </form>
+
+</div>
+
+<footer th:replace="partials/partials.html :: footer"/>
+
+</body>
+</html>
