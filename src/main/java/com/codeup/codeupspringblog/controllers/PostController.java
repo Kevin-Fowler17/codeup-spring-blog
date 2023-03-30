@@ -4,6 +4,7 @@ import com.codeup.codeupspringblog.models.Post;
 import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repositories.PostRepository;
 import com.codeup.codeupspringblog.repositories.UserRepository;
+import com.codeup.codeupspringblog.services.EmailService;
 import jakarta.annotation.Nullable;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,6 +23,7 @@ public class PostController {
     // dependency injection
     private final PostRepository postDao;
     private final UserRepository userDao;
+    private final EmailService emailService;
 
     @GetMapping
     public String posts(@RequestParam @Nullable String search,
@@ -85,6 +87,8 @@ public class PostController {
         post.setUser(currentUser);
 
         postDao.save(post);
+
+        emailService.prepareAndSend(post, "New blog created: " + post.getTitle(), "A new blog was created for your account.");
 
         return "redirect:/posts";
     }
