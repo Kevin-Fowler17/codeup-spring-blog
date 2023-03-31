@@ -41,11 +41,12 @@ public class PostController {
             List<Post> posts = postDao.findAll();
             model.addAttribute("posts", posts);
         }
+        System.out.println("***************");
 
         return "/posts/index";
     }
 
-    @PostMapping(path = "")
+    @PostMapping
     public String editDelete(@RequestParam(name = "button") String buttonClicked) {
 
         String postID = buttonClicked.replace("edit", "").replace("delete", "");
@@ -76,6 +77,12 @@ public class PostController {
     @GetMapping("/create")
     public String createPost(Model model) {
 
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (user == null) {
+            return "/login";
+        }
+
         model.addAttribute("post", new Post());
         return "/posts/create";
     }
@@ -99,6 +106,12 @@ public class PostController {
 
     @GetMapping("/{id}/edit")
     public String editPost(@PathVariable long id, Model model) {
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (user == null) {
+            return "/login";
+        }
 
         Post post = postDao.findById(id).get();
         model.addAttribute("post", post);
