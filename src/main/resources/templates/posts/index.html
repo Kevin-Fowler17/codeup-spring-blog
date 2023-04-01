@@ -28,8 +28,8 @@
 <!--                            <div th:if="${session.user.id == post.user.id && session.user != null}" class="editDeleteButtons">-->
 
                             <div th:if="${user != null && user.id == post.user.id}" class="editDeleteButtons">
-                                <button type="submit" name="button" class="btn btn-outline-secondary" th:value="'edit' + ${post.id}">Edit</button>
-                                <button type="submit" name="button" class="btn btn-outline-secondary" th:value="'delete' + ${post.id}">Delete</button>
+                                <a class="btn btn-outline-secondary" th:href="@{/posts/} + ${post.id} + '/edit'" role="button">Edit</a>
+                                <a class="btn btn-outline-secondary" th:href="@{/posts/} + ${post.id} + '/delete'" role="button">Delete</a>
                             </div>
                         </div>
                     </div>

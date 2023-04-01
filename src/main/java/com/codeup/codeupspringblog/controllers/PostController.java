@@ -41,28 +41,8 @@ public class PostController {
             List<Post> posts = postDao.findAll();
             model.addAttribute("posts", posts);
         }
-        System.out.println("***************");
 
         return "/posts/index";
-    }
-
-    @PostMapping
-    public String editDelete(@RequestParam(name = "button") String buttonClicked) {
-
-        String postID = buttonClicked.replace("edit", "").replace("delete", "");
-
-        System.out.println("***************");
-        System.out.println(postID);
-        System.out.println("***************");
-
-        if (buttonClicked.contains("edit")) {
-            return "redirect:/posts/" + postID + "/edit";
-        } else {
-            postDao.deleteById(Long.valueOf(postID));
-        }
-
-        return "redirect:/posts";
-
     }
 
     @GetMapping("/{id}")
@@ -70,6 +50,9 @@ public class PostController {
 
         Post post = postDao.findById(id).get();
         model.addAttribute("post", post);
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", user);
 
         return "/posts/show";
     }
@@ -109,14 +92,30 @@ public class PostController {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        if (user == null) {
-            return "/login";
+        Post post = postDao.findById(id).get();
+        model.addAttribute("post", post);
+
+        if (user.getId() == post.getUser().getId()) {
+            return "/posts/create";
         }
+
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/{id}/delete")
+    public String deletePost(@PathVariable long id, Model model){
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         Post post = postDao.findById(id).get();
         model.addAttribute("post", post);
 
-        return "/posts/create";
+        if (user.getId() == post.getUser().getId()) {
+            postDao.deleteById(Long.valueOf(id));
+        }
+
+        return "redirect:/posts";
+
     }
 
 }

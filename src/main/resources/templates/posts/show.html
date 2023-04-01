@@ -14,6 +14,10 @@
             <h3 th:text="${post.title}">title is missing</h3>
             <p th:text="${post.body}">body is missing</p>
             <p>Email: <span th:text="${post.user.email}"></span></p>
+            <div th:if="${user != null && user.id == post.user.id}" class="editDeleteButtons">
+                <a class="btn btn-outline-secondary" th:href="@{/posts/} + ${post.id} + '/edit'" role="button">Edit</a>
+                <a class="btn btn-outline-secondary" th:href="@{/posts/} + ${post.id} + '/delete'" role="button">Delete</a>
+            </div>
         </div>
     </div>
 </div>
