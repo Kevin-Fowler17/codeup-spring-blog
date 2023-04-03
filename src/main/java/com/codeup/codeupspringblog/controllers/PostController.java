@@ -9,6 +9,7 @@ import jakarta.annotation.Nullable;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,9 +31,12 @@ public class PostController {
     public String posts(@RequestParam @Nullable String search,
                         Model model) {
 
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        model.addAttribute("user", user);
+        if (authentication.getPrincipal() != "anonymousUser") {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("user", user);
+        }
 
         if (search != null) {
             List<Post> posts = (List<Post>) postDao.findLikeTitleOrBody(search);
@@ -51,8 +55,15 @@ public class PostController {
         Post post = postDao.findById(id).get();
         model.addAttribute("post", post);
 
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("user", user);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication.getPrincipal() != "anonymousUser") {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("user", user);
+        }
+
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        model.addAttribute("user", user);
 
         return "/posts/show";
     }
