@@ -20,14 +20,11 @@
             <a th:href="@{/posts/} + ${post.id}" class="NoDeco">
                 <div class="container">
                     <div class="card m-2 mb-4 col-1 col-md-6 col-sm-2" style="width: 20rem;">
-<!--                        <div class="card m-4" style="width: 22rem;">-->
                         <div class="card-body">
                             <h3 th:text="${post.title}">title is missing</h3>
                             <p th:text="${post.body}">body is missing</p>
                             <p><a th:href="@{/posts/} + ${post.id}">Link</a></p>
-<!--                            <div th:if="${session.user.id == post.user.id && session.user != null}" class="editDeleteButtons">-->
-
-                            <div th:if="${user != null && user.id == post.user.id}" class="editDeleteButtons">
+                            <div sec:authorize="isAuthenticated()" th:if="${user.id == post.user.id}" class="editDeleteButtons">
                                 <a class="btn btn-outline-secondary" th:href="@{/posts/} + ${post.id} + '/edit'" role="button">Edit</a>
                                 <a class="btn btn-outline-secondary" th:href="@{/posts/} + ${post.id} + '/delete'" role="button">Delete</a>
                             </div>

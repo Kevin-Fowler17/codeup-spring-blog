@@ -62,9 +62,6 @@ public class PostController {
             model.addAttribute("user", user);
         }
 
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        model.addAttribute("user", user);
-
         return "/posts/show";
     }
 
